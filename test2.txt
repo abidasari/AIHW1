@@ -1,0 +1,24 @@
+3
+DFS
+AA
+BB
+
+1
+AA BB 2 0
+3
+
+BFS
+AA
+BB
+
+1
+AA BB 2 0
+3
+
+UCS
+AA
+BB
+
+1
+AA BB 2 0
+3

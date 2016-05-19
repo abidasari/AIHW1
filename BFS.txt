@@ -1,0 +1,77 @@
+string Graph :: BFS()
+{
+	cout << "Running BFS..." << endl;
+	string output; 
+	int cost = onTime;	
+	queue<vertex> frontier;//previously it was a queue of strings
+	list<vertex> explored;//previously a list of strings
+	ostringstream out;
+	map<string, int> newFrontier;
+	
+//	if (find(destinations.begin(), destinations.end(), source) != destinations.end())//source is the destination!!
+//	{
+//		output = source + " ";
+//		out << cost + 1 << "!!!!!!\n";
+//		output = output + out.str() + "\n";
+//		return output;
+//	}
+	vertex current(source, cost, "");//previously current was a string
+	frontier.push(current);
+	//int i=0;
+	while(!frontier.empty())
+	{
+		//cout<< cost << endl;
+		current = frontier.front();
+		explored.push_back(current);
+		frontier.pop();
+		cost = current.cost;
+		list<vertex> :: iterator p3;
+		map<string, int> :: iterator s3;
+		cout << "\nNow current node is: " << current.name << "\n";
+		//for getting the Adj List and sorting it in Ascending order
+		for(p3 = adjList[current.name].begin(); p3 != adjList[current.name].end(); ++p3)
+		{
+			cout<< "\nPutting " << p3->name << " on the newFrontiers list";
+			newFrontier.insert(pair<string, int>(p3->name, cost + 1));//this will automatically put it in asc order	HERE PUT IN COST+1 IN TO THE COST PART		
+		}
+		//for checking sorted list's members and putting them on the frontier
+		for(s3 = newFrontier.begin(); s3 != newFrontier.end(); s3++)
+		{
+			cout << "\nChecking  if " << s3->first << " is the destination (this is inside the newfrontier)" ; 
+			if(find(destinations.begin(), destinations.end(), s3->first) != destinations.end())
+			{
+				//Yay!! found a destination!!!
+				out << s3->second;
+				output = s3->first + " " + out.str() + "\n";
+				return output;
+			}
+
+			list<vertex>::iterator listit;
+			bool flip = true;			
+
+			for (listit = explored.begin(); listit != explored.end(); ++listit) 
+			{
+    			if(listit->name == s3->first)
+    				flip = false;
+			}
+
+			
+			//listit = find (explored.begin(), explored.end(), temp);
+			if(flip)//element not in explored
+			{				
+				vertex temp(s3->first, s3->second, "");
+				frontier.push(temp);
+				newFrontier.erase(s3->first);
+				cout << "\nPutting " << s3->first << " into the frontiers list. And the total cost now is " << cost << endl;
+			}					
+		}
+		if(newFrontier.empty())
+		{
+			cost -= 1; 
+			cout << "\nThis is the cost when frontier becomes empty " << cost ;
+		}
+		newFrontier.clear();
+	}
+	//no destination found!!!
+	return "NULL";			
+}

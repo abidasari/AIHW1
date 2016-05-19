@@ -1,0 +1,44 @@
+3
+DFS
+AA
+BA
+CA DA
+3
+AA DA 10 1 1-2
+AA CA 2 2 3-4 5-6
+CA DA 4 0
+0
+
+DFS
+S
+G2 G1 G3 H
+A B C D E F I
+15
+S C 7 0
+S A 5 0
+S B 1 0
+A F 9 0
+A E 8 0
+B A 9 0
+B H 4 0
+B G3 3 0
+C D 1 0
+D B 1 0
+H G3 4 0
+F G2 2 0
+E G1 9 0
+G2 I 0 0
+I G1 2 0
+3
+
+DFS
+P
+Q R
+L M N O
+5
+P L 10 0
+P N 5 2 3-4 6-9
+M Q 8 1 4-6
+O R 3 0
+N M 5 1 1-2
+5
